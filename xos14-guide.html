@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinix GT10 Pro - XOS 14 Upgrade Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="guide-styles.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <div class="guide-container">
+        <header class="guide-header">
+            <h1>Infinix GT10 Pro - Upgrade to XOS 14 Guide</h1>
+            <div class="guide-meta">
+                <span class="author">By Zerotracex</span>
+                <span class="date">April 01, 2025</span>
+            </div>
+        </header>
+        <div class="guide-content">
+            <section class="prerequisites">
+                <h2><i class="fas fa-list-check"></i> Prerequisites</h2>
+                <ul>
+                    <li><i class="fas fa-desktop"></i> Windows PC with USB ports</li>
+                    <li><i class="fas fa-usb"></i> USB cable (preferably the original one)</li>
+                    <li><i class="fas fa-unlock"></i> Unlocked bootloader</li>
+                    <li><i class="fas fa-database"></i> Complete backup of important data (all data will be erased)</li>
+                    <li><i class="fas fa-download"></i> Downloaded XOS 14 firmware</li>
+                </ul>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-mobile-alt"></i> Step 1: Prepare Your Device</h2>
+                <ol>
+                    <li>Go to <strong>Settings > About Phone</strong></li>
+                    <li>Tap <strong>Build Number</strong> 7 times to enable Developer Options</li>
+                    <li>Go to <strong>Settings > System > Developer Options</strong></li>
+                    <li>Enable <strong>USB Debugging</strong></li>
+                </ol>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-tools"></i> Step 2: Set Up the Flashing Tool</h2>
+                <ol>
+                    <li>Download Flashing tool on your PC</li>
+                    <li>Open the tool</li>
+                </ol>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-plug"></i> Step 3: Connect Your Device and Enter Fastboot Mode</h2>
+                <ol>
+                    <li>Connect your Infinix GT10 Pro to the PC using a USB cable</li>
+                    <li>On your phone, tap <strong>Allow</strong> when prompted for USB debugging permission</li>
+                    <li>Press on <strong>Check Device</strong></li>
+                    <li>In the tool, check the connection status - it should show <strong>Connected via ADB</strong></li>
+                    <li>Click <strong>Reboot to Fastboot</strong> to switch to fastboot mode</li>
+                    <li>Your device will restart into a special screen with text</li>
+                    <li>Wait for the tool to show "Connected via Fastboot"</li>
+                </ol>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-file-arrow-down"></i> Step 4: Select XOS 14 Firmware</h2>
+                <ol>
+                    <li>Click the <strong>Browse</strong> button in the tool</li>
+                    <li>Navigate to and select the folder containing your extracted XOS 14 firmware files</li>
+                    <li>The tool will verify all required files are present</li>
+                    <li>If any files are missing, you'll see an error message</li>
+                </ol>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-arrow-up"></i> Step 5: Upgrade to XOS 14</h2>
+                <ol>
+                    <li>Click the <strong>Upgrade to XOS14</strong> button</li>
+                    <li>Read the warning message carefully - ALL DATA WILL BE ERASED</li>
+                    <li>Click <strong>Confirm</strong> to proceed</li>
+                    <li>Monitor the flashing process:
+                        <ul>
+                            <li>Progress bar shows overall completion percentage</li>
+                            <li>Log window displays detailed operation steps</li>
+                            <li>Status label shows current operation</li>
+                        </ul>
+                    </li>
+                    <li>Do not disconnect your device or interrupt the process</li>
+                </ol>
+            </section>
+
+            <section class="step">
+                <h2><i class="fas fa-check-circle"></i> Step 6: Complete the Process</h2>
+                <ol>
+                    <li>Wait for "Process completed successfully" message</li>
+                    <li>Click <strong>Reboot Device</strong> to restart your phone</li>
+                    <li>Set up your device as new when prompted</li>
+                </ol>
+            </section>
+
+            <section class="troubleshooting">
+                <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                <ul>
+                    <li>If the process fails, try repeating the steps</li>
+                    <li>Ensure you're using the correct firmware files for your specific model</li>
+                    <li>Check the log window for specific error messages</li>
+                </ul>
+            </section>
+
+            <section class="warning">
+                <h2><i class="fas fa-exclamation-triangle"></i> WARNING</h2>
+                <ul>
+                    <li>Upgrading firmware will erase ALL data on your device</li>
+                    <li>Interrupting the flashing process may brick your device</li>
+                    <li>Proceed at your own risk</li>
+                </ul>
+            </section>
+        </div>
+        <footer class="guide-footer">
+            <a href="infinix-tool.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Main Page
+            </a>
+        </footer>
+    </div>
+</body>
+</html> 

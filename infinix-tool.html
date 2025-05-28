@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinix GT10 Pro Flashing Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="guide-styles.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <div class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h1 class="splash-title">Infinix GT10 Pro</h1>
+            <div class="splash-subtitle">Flashing Tool</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div id="main-page" class="container">
+        <div class="content">
+            <h1 class="title">🔥 Infinix GT10 Pro Flashing Tool 🔥</h1>
+            <div class="version-info">
+                <p>Flash: XOS 13/14 | Android 13/14</p>
+                <p>Build: GT10 Pro | V2.0-Stable</p>
+            </div>
+            
+            <div class="changelog">
+                <h2>Change log:</h2>
+                <ul>
+                    <li>Fixed Reset bug</li>
+                </ul>
+            </div>
+
+            <div class="requirements">
+                <h2>⚙️ Requirements:</h2>
+                <ul>
+                    <li><i class="fas fa-desktop"></i> Windows PC</li>
+                    <li><i class="fas fa-mobile-alt"></i> USB debugging enabled</li>
+                    <li><i class="fas fa-download"></i> ADB Drivers</li>
+                    <li><i class="fas fa-microchip"></i> MTK Drivers</li>
+                </ul>
+            </div>
+
+            <div class="download-section">
+                <h2>📥 Downloads:</h2>
+                <div class="download-grid">
+                    <a href="Infinix_GT10_Tool V2.exe" class="download-card" download="Infinix_GT10_Pro_Flashing_Tool.exe">
+                        <i class="fas fa-tools"></i>
+                        <span>Download Tool</span>
+                    </a>
+                    <a href="xos13-guide.html" class="download-card">
+                        <i class="fas fa-book"></i>
+                        <span>XOS 13 Guide</span>
+                    </a>
+                    <a href="xos14-guide.html" class="download-card">
+                        <i class="fas fa-book"></i>
+                        <span>XOS 14 Guide</span>
+                    </a>
+                    <a href="vendor-boot-guide.html" class="download-card">
+                        <i class="fas fa-microchip"></i>
+                        <span>Vendor_Boot Guide</span>
+                    </a>
+                    <a href="boot-guide.html" class="download-card">
+                        <i class="fas fa-microchip"></i>
+                        <span>Boot Guide</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="drivers-section">
+                <h2>🔧 Required Drivers:</h2>
+                <div class="driver-buttons">
+                    <a href="15_Second_ADB_Installer_v1.3.0.zip" class="btn primary"><i class="fas fa-download"></i> ADB Drivers</a>
+                    <a href="MTK_Driver_Auto_Installer_EXE_v5.1632.00.rar" class="btn secondary"><i class="fas fa-download"></i> MTK Drivers</a>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h2>📝 Notes:</h2>
+                <ul>
+                    <li>Tool Version: v2</li>
+                    <li>IMPORTANT: Make full backup before flashing</li>
+                    <li>Supports both downgrade and upgrade paths</li>
+                    <li>Must be in fastboot mode to flash ROMs</li>
+                </ul>
+            </div>
+
+            <div class="issues">
+                <h2>⚠️ Known Issues:</h2>
+                <p>No known issues at the moment.</p>
+            </div>
+
+            <div class="contact">
+                <p>If you have any questions or need assistance, contact <a href="https://t.me/zerotracex1" class="telegram-link">@zerotracex1</a></p>
+            </div>
+        </div>
+        <div id="canvas-container"></div>
+    </div>
+
+    <!-- Guide Content Container -->
+    <div id="guide-container" class="guide-container" style="display: none;">
+        <header class="guide-header">
+            <h1 id="guide-title"></h1>
+            <div class="guide-meta">
+                <span class="author">By Zerotracex</span>
+                <span class="date">April 01, 2025</span>
+            </div>
+        </header>
+        <div id="guide-content" class="guide-content"></div>
+        <footer class="guide-footer">
+            <a href="infinix-tool.html" class="back-button" id="back-to-main">
+                <i class="fas fa-arrow-left"></i> Back to Main Page
+            </a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Guide content templates
+        const guideTemplates = {
+            xos13: {
+                title: "Infinix GT10 Pro - Downgrade to XOS 13 Guide",
+                content: document.querySelector('#xos13-content').innerHTML
+            },
+            xos14: {
+                title: "Infinix GT10 Pro - Upgrade to XOS 14 Guide",
+                content: document.querySelector('#xos14-content').innerHTML
+            },
+            'vendor-boot': {
+                title: "Infinix GT10 Pro - Vendor_Boot Flashing Guide",
+                content: document.querySelector('#vendor-boot-content').innerHTML
+            },
+            boot: {
+                title: "Infinix GT10 Pro - Boot Image Flashing Guide",
+                content: document.querySelector('#boot-content').innerHTML
+            }
+        };
+
+        // Add hidden content containers
+        const contentContainers = `
+            <div id="xos13-content" style="display: none;">
+                <section class="prerequisites">
+                    <h2><i class="fas fa-list-check"></i> Prerequisites</h2>
+                    <ul>
+                        <li><i class="fas fa-desktop"></i> Windows PC with USB ports</li>
+                        <li><i class="fas fa-usb"></i> USB cable (preferably the original one)</li>
+                        <li><i class="fas fa-unlock"></i> Unlocked bootloader</li>
+                        <li><i class="fas fa-database"></i> Complete backup of important data (all data will be erased)</li>
+                        <li><i class="fas fa-download"></i> Downloaded XOS 13 firmware</li>
+                    </ul>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-mobile-alt"></i> Step 1: Prepare Your Device</h2>
+                    <ol>
+                        <li>Go to <strong>Settings > About Phone</strong></li>
+                        <li>Tap <strong>Build Number</strong> 7 times to enable Developer Options</li>
+                        <li>Go to <strong>Settings > System > Developer Options</strong></li>
+                        <li>Enable <strong>USB Debugging</strong></li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-tools"></i> Step 2: Set Up the Flashing Tool</h2>
+                    <ol>
+                        <li>Download Flashing tool on your PC</li>
+                        <li>Open the tool</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-plug"></i> Step 3: Connect Your Device and Enter Fastboot Mode</h2>
+                    <ol>
+                        <li>Connect your Infinix GT10 Pro to the PC using a USB cable</li>
+                        <li>On your phone, tap <strong>Allow</strong> when prompted for USB debugging permission</li>
+                        <li>Press on <strong>Check Device</strong></li>
+                        <li>In the tool, check the connection status - it should show <strong>Connected via ADB</strong></li>
+                        <li>Click <strong>Reboot to Fastboot</strong> to switch to fastboot mode</li>
+                        <li>Your device will restart into a special screen with text</li>
+                        <li>Wait for the tool to show "Connected via Fastboot"</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-file-arrow-down"></i> Step 4: Select XOS 13 Firmware</h2>
+                    <ol>
+                        <li>Click the <strong>Browse</strong> button in the tool</li>
+                        <li>Navigate to and select the folder containing your extracted XOS 13 firmware files</li>
+                        <li>The tool will verify all required files are present</li>
+                        <li>If any files are missing, you'll see an error message</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-arrow-down"></i> Step 5: Downgrade to XOS 13</h2>
+                    <ol>
+                        <li>Click the <strong>Downgrade to XOS13</strong> button</li>
+                        <li>Read the warning message carefully - ALL DATA WILL BE ERASED</li>
+                        <li>Click <strong>Confirm</strong> to proceed</li>
+                        <li>Monitor the flashing process:
+                            <ul>
+                                <li>Progress bar shows overall completion percentage</li>
+                                <li>Log window displays detailed operation steps</li>
+                                <li>Status label shows current operation</li>
+                            </ul>
+                        </li>
+                        <li>Do not disconnect your device or interrupt the process</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-check-circle"></i> Step 6: Complete the Process</h2>
+                    <ol>
+                        <li>Wait for "Process completed successfully" message</li>
+                        <li>Click <strong>Reboot Device</strong> to restart your phone</li>
+                        <li>Set up your device as new when prompted</li>
+                    </ol>
+                </section>
+
+                <section class="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <ul>
+                        <li>If the process fails, try repeating the steps</li>
+                        <li>Ensure you're using the correct firmware files for your specific model</li>
+                        <li>Check the log window for specific error messages</li>
+                    </ul>
+                </section>
+
+                <section class="warning">
+                    <h2><i class="fas fa-exclamation-triangle"></i> WARNING</h2>
+                    <ul>
+                        <li>Downgrading firmware will erase ALL data on your device</li>
+                        <li>Interrupting the flashing process may brick your device</li>
+                        <li>Proceed at your own risk</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div id="xos14-content" style="display: none;">
+                <section class="prerequisites">
+                    <h2><i class="fas fa-list-check"></i> Prerequisites</h2>
+                    <ul>
+                        <li><i class="fas fa-desktop"></i> Windows PC with USB ports</li>
+                        <li><i class="fas fa-usb"></i> USB cable (preferably the original one)</li>
+                        <li><i class="fas fa-unlock"></i> Unlocked bootloader</li>
+                        <li><i class="fas fa-database"></i> Complete backup of important data (all data will be erased)</li>
+                        <li><i class="fas fa-download"></i> Downloaded XOS 14 firmware</li>
+                    </ul>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-mobile-alt"></i> Step 1: Prepare Your Device</h2>
+                    <ol>
+                        <li>Go to <strong>Settings > About Phone</strong></li>
+                        <li>Tap <strong>Build Number</strong> 7 times to enable Developer Options</li>
+                        <li>Go to <strong>Settings > System > Developer Options</strong></li>
+                        <li>Enable <strong>USB Debugging</strong></li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-tools"></i> Step 2: Set Up the Flashing Tool</h2>
+                    <ol>
+                        <li>Download Flashing tool on your PC</li>
+                        <li>Open the tool</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-plug"></i> Step 3: Connect Your Device and Enter Fastboot Mode</h2>
+                    <ol>
+                        <li>Connect your Infinix GT10 Pro to the PC using a USB cable</li>
+                        <li>On your phone, tap <strong>Allow</strong> when prompted for USB debugging permission</li>
+                        <li>Press on <strong>Check Device</strong></li>
+                        <li>In the tool, check the connection status - it should show <strong>Connected via ADB</strong></li>
+                        <li>Click <strong>Reboot to Fastboot</strong> to switch to fastboot mode</li>
+                        <li>Your device will restart into a special screen with text</li>
+                        <li>Wait for the tool to show "Connected via Fastboot"</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-file-arrow-down"></i> Step 4: Select XOS 14 Firmware</h2>
+                    <ol>
+                        <li>Click the <strong>Browse</strong> button in the tool</li>
+                        <li>Navigate to and select the folder containing your extracted XOS 14 firmware files</li>
+                        <li>The tool will verify all required files are present</li>
+                        <li>If any files are missing, you'll see an error message</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-arrow-up"></i> Step 5: Upgrade to XOS 14</h2>
+                    <ol>
+                        <li>Click the <strong>Upgrade to XOS14</strong> button</li>
+                        <li>Read the warning message carefully - ALL DATA WILL BE ERASED</li>
+                        <li>Click <strong>Confirm</strong> to proceed</li>
+                        <li>Monitor the flashing process:
+                            <ul>
+                                <li>Progress bar shows overall completion percentage</li>
+                                <li>Log window displays detailed operation steps</li>
+                                <li>Status label shows current operation</li>
+                            </ul>
+                        </li>
+                        <li>Do not disconnect your device or interrupt the process</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-check-circle"></i> Step 6: Complete the Process</h2>
+                    <ol>
+                        <li>Wait for "Process completed successfully" message</li>
+                        <li>Click <strong>Reboot Device</strong> to restart your phone</li>
+                        <li>Set up your device as new when prompted</li>
+                    </ol>
+                </section>
+
+                <section class="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <ul>
+                        <li>If the process fails, try repeating the steps</li>
+                        <li>Ensure you're using the correct firmware files for your specific model</li>
+                        <li>Check the log window for specific error messages</li>
+                    </ul>
+                </section>
+
+                <section class="warning">
+                    <h2><i class="fas fa-exclamation-triangle"></i> WARNING</h2>
+                    <ul>
+                        <li>Upgrading firmware will erase ALL data on your device</li>
+                        <li>Interrupting the flashing process may brick your device</li>
+                        <li>Proceed at your own risk</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div id="vendor-boot-content" style="display: none;">
+                <section class="prerequisites">
+                    <h2><i class="fas fa-list-check"></i> Prerequisites</h2>
+                    <ul>
+                        <li><i class="fas fa-desktop"></i> Windows PC with USB ports</li>
+                        <li><i class="fas fa-usb"></i> USB cable (preferably the original one)</li>
+                        <li><i class="fas fa-unlock"></i> Unlocked bootloader</li>
+                        <li><i class="fas fa-file-code"></i> Custom or stock vendor_boot.img file</li>
+                        <li><i class="fas fa-mobile-alt"></i> Device must be on XOS 14</li>
+                    </ul>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-mobile-alt"></i> Step 1: Prepare Your Device</h2>
+                    <ol>
+                        <li>Go to <strong>Settings > About Phone</strong></li>
+                        <li>Tap <strong>Build Number</strong> 7 times to enable Developer Options</li>
+                        <li>Go to <strong>Settings > System > Developer Options</strong></li>
+                        <li>Enable <strong>USB Debugging</strong></li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-tools"></i> Step 2: Set Up the Flashing Tool</h2>
+                    <ol>
+                        <li>Download Flashing tool on your PC</li>
+                        <li>Open the tool</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-plug"></i> Step 3: Connect Your Device and Enter Fastboot Mode</h2>
+                    <ol>
+                        <li>Connect your Infinix GT10 Pro to the PC using a USB cable</li>
+                        <li>On your phone, tap <strong>Allow</strong> when prompted for USB debugging permission</li>
+                        <li>Press on <strong>Check Device</strong></li>
+                        <li>In the tool, check the connection status - it should show <strong>Connected via ADB</strong></li>
+                        <li>Click <strong>Reboot to Fastboot</strong> to switch to fastboot mode</li>
+                        <li>Your device will restart into a special screen with text</li>
+                        <li>Wait for the tool to show "Connected via Fastboot"</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-file-arrow-down"></i> Step 4: Select Vendor Boot Image</h2>
+                    <ol>
+                        <li>Click the <strong>Browse</strong> button in the tool</li>
+                        <li>Navigate to and select your vendor_boot.img file</li>
+                        <li>The tool will verify the file is present</li>
+                        <li>If the file is missing, you'll see an error message</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-upload"></i> Step 5: Flash Vendor Boot Image</h2>
+                    <ol>
+                        <li>Click the <strong>Flash Vendor Boot</strong> button</li>
+                        <li>Read the warning message carefully</li>
+                        <li>Click <strong>Confirm</strong> to proceed</li>
+                        <li>Monitor the flashing process:
+                            <ul>
+                                <li>Progress bar shows overall completion percentage</li>
+                                <li>Log window displays detailed operation steps</li>
+                                <li>Status label shows current operation</li>
+                            </ul>
+                        </li>
+                        <li>Do not disconnect your device or interrupt the process</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-check-circle"></i> Step 6: Complete the Process</h2>
+                    <ol>
+                        <li>Wait for "Process completed successfully" message</li>
+                        <li>Click <strong>Reboot Device</strong> to restart your phone</li>
+                        <li>Your device should now boot with the new vendor boot image</li>
+                    </ol>
+                </section>
+
+                <section class="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <ul>
+                        <li>If the process fails, try repeating the steps</li>
+                        <li>Ensure you're using the correct vendor_boot.img for your device</li>
+                        <li>Check the log window for specific error messages</li>
+                        <li>If your device fails to boot, you may need to reflash the original vendor_boot.img</li>
+                    </ul>
+                </section>
+
+                <section class="warning">
+                    <h2><i class="fas fa-exclamation-triangle"></i> WARNING</h2>
+                    <ul>
+                        <li>Flashing an incorrect vendor_boot.img may cause boot issues</li>
+                        <li>Interrupting the flashing process may brick your device</li>
+                        <li>Always keep a backup of your original vendor_boot.img</li>
+                        <li>Proceed at your own risk</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div id="boot-content" style="display: none;">
+                <section class="prerequisites">
+                    <h2><i class="fas fa-list-check"></i> Prerequisites</h2>
+                    <ul>
+                        <li><i class="fas fa-desktop"></i> Windows PC with USB ports</li>
+                        <li><i class="fas fa-usb"></i> USB cable (preferably the original one)</li>
+                        <li><i class="fas fa-unlock"></i> Unlocked bootloader</li>
+                        <li><i class="fas fa-file-code"></i> Custom or stock boot.img file</li>
+                        <li><i class="fas fa-mobile-alt"></i> Device must be on XOS 14</li>
+                    </ul>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-mobile-alt"></i> Step 1: Prepare Your Device</h2>
+                    <ol>
+                        <li>Go to <strong>Settings > About Phone</strong></li>
+                        <li>Tap <strong>Build Number</strong> 7 times to enable Developer Options</li>
+                        <li>Go to <strong>Settings > System > Developer Options</strong></li>
+                        <li>Enable <strong>USB Debugging</strong></li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-tools"></i> Step 2: Set Up the Flashing Tool</h2>
+                    <ol>
+                        <li>Download Flashing tool on your PC</li>
+                        <li>Open the tool</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-plug"></i> Step 3: Connect Your Device and Enter Fastboot Mode</h2>
+                    <ol>
+                        <li>Connect your Infinix GT10 Pro to the PC using a USB cable</li>
+                        <li>On your phone, tap <strong>Allow</strong> when prompted for USB debugging permission</li>
+                        <li>Press on <strong>Check Device</strong></li>
+                        <li>In the tool, check the connection status - it should show <strong>Connected via ADB</strong></li>
+                        <li>Click <strong>Reboot to Fastboot</strong> to switch to fastboot mode</li>
+                        <li>Your device will restart into a special screen with text</li>
+                        <li>Wait for the tool to show "Connected via Fastboot"</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-file-arrow-down"></i> Step 4: Select Boot Image</h2>
+                    <ol>
+                        <li>Click the <strong>Browse</strong> button in the tool</li>
+                        <li>Navigate to and select your boot.img file</li>
+                        <li>The tool will verify the file is present</li>
+                        <li>If the file is missing, you'll see an error message</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-upload"></i> Step 5: Flash Boot Image</h2>
+                    <ol>
+                        <li>Click the <strong>Flash Boot</strong> button</li>
+                        <li>Read the warning message carefully</li>
+                        <li>Click <strong>Confirm</strong> to proceed</li>
+                        <li>Monitor the flashing process:
+                            <ul>
+                                <li>Progress bar shows overall completion percentage</li>
+                                <li>Log window displays detailed operation steps</li>
+                                <li>Status label shows current operation</li>
+                            </ul>
+                        </li>
+                        <li>Do not disconnect your device or interrupt the process</li>
+                    </ol>
+                </section>
+
+                <section class="step">
+                    <h2><i class="fas fa-check-circle"></i> Step 6: Complete the Process</h2>
+                    <ol>
+                        <li>Wait for "Process completed successfully" message</li>
+                        <li>Click <strong>Reboot Device</strong> to restart your phone</li>
+                        <li>Your device should now boot with the new boot image</li>
+                    </ol>
+                </section>
+
+                <section class="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <ul>
+                        <li>If the process fails, try repeating the steps</li>
+                        <li>Ensure you're using the correct boot.img for your device</li>
+                        <li>Check the log window for specific error messages</li>
+                        <li>If your device fails to boot, you may need to reflash the original boot.img</li>
+                    </ul>
+                </section>
+
+                <section class="warning">
+                    <h2><i class="fas fa-exclamation-triangle"></i> WARNING</h2>
+                    <ul>
+                        <li>Flashing an incorrect boot.img may cause boot issues</li>
+                        <li>Interrupting the flashing process may brick your device</li>
+                        <li>Always keep a backup of your original boot.img</li>
+                        <li>Proceed at your own risk</li>
+                    </ul>
+                </section>
+            </div>
+        `;
+
+        // Add content containers to the page
+        document.body.insertAdjacentHTML('beforeend', contentContainers);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.querySelector('.splash-screen');
+            const mainPage = document.getElementById('main-page');
+            const guideContainer = document.getElementById('guide-container');
+            const guideTitle = document.getElementById('guide-title');
+            const guideContent = document.getElementById('guide-content');
+            const backButton = document.getElementById('back-to-main');
+
+            // Check if user came from another page on our site
+            const referrer = document.referrer;
+            const isInternalNavigation = referrer.includes(window.location.hostname);
+            
+            if (isInternalNavigation) {
+                splashScreen.style.display = 'none';
+            } else {
+                splashScreen.style.display = 'flex';
+                setTimeout(() => {
+                    splashScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        splashScreen.style.display = 'none';
+                    }, 500);
+                }, 2000);
+            }
+
+            // Handle guide navigation
+            document.querySelectorAll('.download-card[data-guide]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const guideType = link.getAttribute('data-guide');
+                    const guide = guideTemplates[guideType];
+                    
+                    if (guide) {
+                        // Update guide content
+                        guideTitle.textContent = guide.title;
+                        guideContent.innerHTML = guide.content;
+                        
+                        // Show guide, hide main page
+                        mainPage.style.display = 'none';
+                        guideContainer.style.display = 'block';
+                        
+                        // Smooth scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Handle back button
+            backButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                guideContainer.style.display = 'none';
+                mainPage.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html> 
